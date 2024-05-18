@@ -10,4 +10,11 @@ const assert = require('assert')
         const result = File.csvToJSON(filePath)
         await assert.rejects(result, expected)
     }
+
+    {
+        const filePath = './mock/emptyFile-invalidHeader.csv'
+        const expected = new Error(error.FILE_FIELDS_ERROR_MESSAGE)
+        const result = File.csvToJSON(filePath)
+        await assert.rejects(result, expected)
+    }
 })()
