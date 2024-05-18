@@ -17,4 +17,12 @@ const assert = require('assert')
         const result = File.csvToJSON(filePath)
         await assert.rejects(result, expected)
     }
+
+    {
+        const filePath = './mock/fiveItems-invalid.csv'
+        const expected = new Error(error.FILE_LENGTH_ERROR_MESSAGE)
+        const result = File.csvToJSON(filePath)
+        await assert.rejects(result, expected)
+    }
+
 })()
