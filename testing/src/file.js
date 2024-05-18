@@ -3,10 +3,7 @@ const { error } = require('./constants')
 const DEFAULT_OPTIONS = {
     maxLines: 3,
     fields: [
-        'id',
-        'name',
-        'profession',
-        'age'
+    'id', 'name', 'profession', 'age'
     ]
 }
 
@@ -19,8 +16,9 @@ class File {
 
     static isValid(csvString, options = DEFAULT_OPTIONS) {
        const [header, ...fileWithoutHeader] = csvString.split(/\r?\n/)
-
-       const isHeaderValid = header === options.fields.join(',')
+       
+       const isHeaderValid = header == options.fields.join(',')
+      
        if (!isHeaderValid) {
         return {
             error: error.FILE_FIELDS_ERROR_MESSAGE,
