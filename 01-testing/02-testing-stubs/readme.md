@@ -1,0 +1,1 @@
+Stubs são usados para substituir algum comportamento do sistema por objetos estáticos, onde se criam mocks diferentes para cada cenário possível
