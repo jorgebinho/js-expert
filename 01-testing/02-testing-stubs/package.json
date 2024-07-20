@@ -1,15 +1,18 @@
 {
   "name": "02-testing-stubs",
   "version": "1.0.0",
-  "description": "Stubs são usados para substituir algum comportamento do sistema por objetos estáticos, onde se criam mocks diferentes para cada cenário possível",
   "main": "index.js",
   "scripts": {
     "test": "node src/service.test.js"
   },
   "engines": {
-    "node": "v18.20.2"
+    "node": "18"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"œ
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sinon": "^15.0.1"
+  }
 }

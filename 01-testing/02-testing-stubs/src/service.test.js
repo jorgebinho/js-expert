@@ -1,16 +1,48 @@
-const Service = require('./service')
-const assert = require('assert')
+const Service = require("./service");
+const assert = require('assert');
+const { createSandbox } = require('sinon');
+
+const sinon = createSandbox();
+const mocks = {
+    alderaan: require('../mocks/alderaan.json'),
+    tatooine: require('../mocks/tatooine.json'),
+};
 
 const BASES_URL = {
-    1: "https://swapi.dev/api/planets/1",
-    2: "https://swapi.dev/api/planets/2"
-}
+    1: "https://swapi.dev/api/planets/1/",
+    2: "https://swapi.dev/api/planets/2/",
+};
 
-;(async () => {
+; (async () => {
+    const service = new Service()
+
+    const stub = sinon.stub(
+        service,
+        service.makeRequest.name
+    )
+
+    stub.withArgs(BASES_URL[1]).resolves(mocks.tatooine)
+    stub.withArgs(BASES_URL[2]).resolves(mocks.alderaan)
+
     {
-        console.log('bateu aqui')
-        const service = new Service()
-        const dados = await service.makeRequest(BASES_URL[1])
-        console.table({ dados })
+        const expected = {
+            name: "Tatooine",
+            surfaceWater: "1",
+            appearedIn: 5,
+        }
+
+        const results = await service.getPlanets(BASES_URL[1])
+        assert.deepStrictEqual(results, expected)
     }
-})
+
+    {
+        const expected = {
+            name: "Alderaan",
+            surfaceWater: "40",
+            appearedIn: 2,
+        }
+
+        const results = await service.getPlanets(BASES_URL[2])
+        assert.deepStrictEqual(results, expected)
+    }
+})()
